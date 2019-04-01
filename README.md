@@ -42,9 +42,9 @@ To run the game simulator, make sure your Visual Studio Code terminal is set to 
 
 [https://code.visualstudio.com/docs/editor/integrated-terminal](https://code.visualstudio.com/docs/editor/integrated-terminal)
 
-Run the following commands from the BattleshipGame Source directory:
+Run the following commands from the BattleshipGame Source directory (Make sure that you published the game, as mentioned above):
 
- 1. cd "./Battleship.Game/bin/Release/netcoreapp2.2/publish"
+ 1. cd ./Battleship.Game/bin/Release/netcoreapp2.2/publish
  2. dotnet ./Battleship.Game.dll "{'SimulationTimer': 50, 'X':['A','B','C','D','E','F','G','H','I','J'],'Y':[1,2,3,4,5,6,7,8,9,10]}"
 
 ## What have I learnt ?
