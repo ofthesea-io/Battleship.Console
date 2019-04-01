@@ -49,7 +49,7 @@ Run the following commands from the BattleshipGame Source directory (Make sure t
 
 ## What have I learnt ?
 
-The game won't scale well. For the moment, the max loop count is 100 (10 X 10), which is nothing. For example the ReDraw() method is suffice for this current implementation, without making things to complicated. Should the grid grow to 3000 for example (the Chinese alphabet, worst case scenario has 3000 characters), the loop will become highly inefficient, as it would need to loop a maximum of 9000000 times. A complete rethink would need to be implemented.
+The game won't scale well. For the moment, the max loop count is 100 (10 X 10), which is nothing. For example the ReDraw() method is suffice for this current implementation, without making things to complicated. Should the grid grow to 3000 for example (the Chinese alphabet, worst case scenario has 3000 characters), the loop will become highly inefficient, as it would need to loop a maximum of 9000000 times. A complete rethink would need to be implemented, such as a SortedDictionary or B-Tree structure.
 
 However, this is only a Kata, so keeping it simple and to specification is the idea. 
 
