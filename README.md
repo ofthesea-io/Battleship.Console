@@ -1,27 +1,27 @@
 ## Battleship Game (First Kata)
-The following Battleship game uses a dimension of 10 X 10 grid.  The game is plotted on a X and Y axis. Instead of coding the X axis as chars, I decided to use the Ascii Table as it contains a numerical representation of characters, such as 'A' starting at point 65 and 'Z' ending in 90.  Both char and int consume one byte in memory ( 0 to 255) so the only overhead is the user input string manipulation. The the reason for working in integers only, was to work in a geometrical graph quadrant manor. This would make working with Line equations, such as the linear Intersection equation easier:
+The following Battleship game uses the dimensions of a 10 X 10 grid.  The game is plotted on a X and Y axis. Instead of coding the X axis as chars, I decided to use the Ascii Table as it contains a numerical representation of characters, such as 'A' starting at point 65 and 'Z' ending in 90.  Both char and int consume one byte in memory (0 to 255) so the only overhead is the user input string manipulation. The reason for working in integers only, was to work in a geometrical graph quadrant manor. This would make working with Line equations, such as the linear Intersection equation easier:
 
 [https://en.wikipedia.org/wiki/Line-line_intersection](https://en.wikipedia.org/wiki/Line%E2%80%93line_intersection)
 
 However, this is a simple console application where the X axis runs from segment 65 to segment 74. It's still presented to the gamer as A to J, and the Y axis starts at segment 1 and ends at segment 10.  The game randomly generates the coordinates for the ships, either aligning them horizontally or vertically along its corresponding axis.
 ![Grid Dimension](https://github.com/VisualSanity/Battleship/blob/master/Support/Grid.jpg)
 
-The user then enters the string input e.g. "A1" or "c7", and this will get mapped to coordinates X and Y accordingly. The flow of the game, flows as the following: 
+The user then enters the string input e.g. "A1" or "c7", and this will get mapped to coordinates X and Y accordingly. The flow of the game, is as follows: 
 
 ![Flow chart](https://github.com/VisualSanity/Battleship/blob/master/Support/Game_FlowChart.jpg)
 
-Console UI code is exacted into a ConsoleHelper class . This was so that I could that I could unit test the UI layer. Most of the other classes are Singletons, as no IoC framework was available. The reason I implemented singletons rather than static classes was that I could unit test, the public methods and follow SOLID practices.
+Console UI code is extracted into a ConsoleHelper class . This was so that I could unit test the UI layer. Most of the other classes are Singletons, as no IoC framework was available. The reason I implemented singletons rather than static classes was so that I could unit test the public methods and follow SOLID practices.
 
 I try and write my code in C#, without to much "syntactic sugar" e.g. chained Linq queries, as it makes debugging unnecessarily more difficult during development. I try and write my code for the next developer in mind.   
 
 ## Running the game
- The game was written in C# (.Net Core 2.2). Fork or clone this repository with your favourite git client or just use the command line. Whatever your  preferred flavour of platform is, make sure you are updated to .Net Core 2.2 SDK
+ The game was written in C# (.Net Core 2.2). Fork or clone this repository with your favourite git client or just use the command line. Whatever your  preferred flavour of platform is, make sure you are updated to .Net Core 2.2 SDK.
 
 **Visual Studio 2017**
 If you are using Visual Studio 2017 on a Microsoft environment , open the solution file in the source directory, (BattleshipGame.sln) and run the build. The nuget packages (NUnit, Newtonsoft) should auto restore.
 
 **Visual Studio Code**
-If you are using Visual Studio Code on any environment (Linux, Mac or Microsoft), open the Battleship.code-workspace and from the Terminal window inside Visual Studio Code run the following commands in order:
+If you are using Visual Studio Code on any environment (Linux, Mac or Microsoft), open the Battleship.code-workspace and from the Terminal Window inside Visual Studio Code run the following commands in order:
  1. dotnet restore
  2. dotnet build -c release 
  3. dotnet publish -c release
@@ -49,7 +49,7 @@ Run the following commands from the BattleshipGame Source directory (Make sure t
 
 ## What have I learnt ?
 
-The game won't scale well. For the moment, the max loop count is one 100 (10 X 10), which is nothing. For example the ReDraw() methods is suffice for this current implementation, without making things to complicated. Should the grid grow to 3000 for example (the Chinese alphabet, worst case scenario), the loop will become highly inefficient, as it would need to loop a maximum of 9000000 times. A complete rethink would need to be implemented.
+The game won't scale well. For the moment, the max loop count is 100 (10 X 10), which is nothing. For example the ReDraw() method is suffice for this current implementation, without making things to complicated. Should the grid grow to 3000 for example (the Chinese alphabet, worst case scenario has 3000 characters), the loop will become highly inefficient, as it would need to loop a maximum of 9000000 times. A complete rethink would need to be implemented.
 
 However, this is only a Kata, so keeping it simple and to specification is the idea. 
 
