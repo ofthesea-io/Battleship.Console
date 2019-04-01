@@ -28,17 +28,9 @@
         {
             segments = new List<Segment>();
 
-            this.Dimension = GridDimension;
-
             yMidPoint = GridDimension / 2;
             xMidPoint = (XInitialPoint + GridDimension / 2) - Index;
         }
-
-        #region Properties
-
-        public int Dimension { get; }
-
-        #endregion
 
         public static ShipRandomiser Instance()
         {
@@ -72,7 +64,7 @@
                 {
                     foreach (IShip ship in ships)
                     {
-                        ShipDirection direction = Randomise.Next(this.Dimension) % 2 == 0
+                        ShipDirection direction = Randomise.Next(this.GridDimension) % 2 == 0
                                                       ? ShipDirection.Horizontal
                                                       : ShipDirection.Vertical;
 
@@ -216,7 +208,7 @@
         private Coordinate GenerateCoordinate()
         {
             int positionX = Randomise.Next(XInitialPoint, XInitialPoint + GridDimension);
-            int positionY = Randomise.Next(Index, this.Dimension);
+            int positionY = Randomise.Next(Index, this.GridDimension);
 
              // if we hit the xMidPoint seed and add/subtract to positionX
             if (positionX == xMidPoint)
