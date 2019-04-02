@@ -52,16 +52,16 @@
 
             consoleHelper.Write("    ");
 
-            foreach (int row in this.GetAlphaColumnChars())
+            foreach (int column in this.GetAlphaColumnChars())
             {
-                consoleHelper.Write($" {Convert.ToChar(row)} ");
+                consoleHelper.Write($" {Convert.ToChar(column)} ");
             }
 
             consoleHelper.WriteLine("  ");
 
-            foreach (int column in this.GetNumericRows())
+            foreach (int row in this.GetNumericRows())
             {
-                consoleHelper.WriteLine($" {column} ");
+                consoleHelper.WriteLine($" {row} ");
             }
 
             // fill the grid with water
