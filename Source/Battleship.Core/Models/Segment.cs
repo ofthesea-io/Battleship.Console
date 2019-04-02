@@ -3,6 +3,9 @@
     using Battleship.Core.Components.Ships;
     using Battleship.Core.Enums;
 
+    /// <summary>
+    ///     Individual segment (cell) in the segmentation list on the grid
+    /// </summary>
     public class Segment
     {
         public Segment(int positionX, int positionY, char character)

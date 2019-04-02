@@ -1,5 +1,8 @@
 ﻿namespace Battleship.Core.Models
 {
+    /// <summary>
+    ///     Players game play stats
+    /// </summary>
     public class PlayerStats
     {
         public int Hit { get; set; }

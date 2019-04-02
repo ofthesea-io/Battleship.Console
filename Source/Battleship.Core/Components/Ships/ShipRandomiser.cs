@@ -5,9 +5,7 @@
     using System.Linq;
 
     using Enums;
-
     using Models;
-
     using Utilities;
 
     public class ShipRandomiser : ComponentBase,  IShipRandomiser
