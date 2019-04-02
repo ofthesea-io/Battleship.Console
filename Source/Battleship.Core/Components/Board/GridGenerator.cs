@@ -123,7 +123,7 @@
             {
                 for (int xCounter = 0; xCounter <= GridDimension - Index; xCounter++)
                 {
-                    consoleHelper.Write(" ~ ");
+                    consoleHelper.Write($" {Water} ");
                     Segment segment = new Segment(XInitialPoint + xCounter, yCounter, Water);
                     segmentation.AddSegment(segment);
                 }
