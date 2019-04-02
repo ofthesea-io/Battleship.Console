@@ -52,13 +52,13 @@
 
         public List<Segment> GetRandomisedShipCoordinates(IList<IShip> ships)
         {
-            // Create a temporary segment list and pass it along by reference
-            // Once done, we can clear it out and make sure the GC does its job
-            List<Segment> temporarySegments = new List<Segment>();
-
             if (ships != null)
             {
                 int totalShipLength = ships.Sum(q => q.ShipLength);
+
+                // Create a temporary segment list and pass it along by reference
+                // Once done, we can clear it out and make sure the GC does its job
+                List<Segment> temporarySegments = new List<Segment>(totalShipLength);
 
                 if (totalShipLength != segments.Count)
                 {
