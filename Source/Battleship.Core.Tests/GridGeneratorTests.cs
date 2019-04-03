@@ -27,6 +27,7 @@
      
             ISegmentation segmentation = Segmentation.Instance();
             shipRandomiser = ShipRandomiser.Instance();
+
             gridGenerator = new GridGenerator(segmentation, shipRandomiser, consoleHelper, new List<IShip>());
         }
 
@@ -34,18 +35,22 @@
         public void Board_WhenGridGenerated_ReturnOneHundredSegments()
         {
             // Arrange
-            int totalSegments = GridDimension * GridDimension;
+            int totalSegments = 100;
             int? result = 0;
 
             // Act
             try
             {
-                gridGenerator.BuildGrid();
+                this.gridGenerator.BuildGrid();
                 result = gridGenerator.NumberOfSegments;
             }
             catch (IndexOutOfRangeException)
             {
                 Assert.Fail();
+            }
+            catch (Exception e)
+            {
+                Assert.Fail($"{e.Message}\n{e.StackTrace}");
             }
 
             // Assert

@@ -211,7 +211,7 @@
              // if we hit the xMidPoint seed and add/subtract to positionX
             if (positionX == xMidPoint)
             {
-                int seed = Randomise.Next(Index, XInitialPoint);
+                int seed = Randomise.Next(XInitialPoint, xMidPoint);
                 positionX = seed % 2 == 0 ? positionX + seed : positionX - seed;
             }
 
