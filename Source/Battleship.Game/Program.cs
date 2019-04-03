@@ -1,16 +1,14 @@
-﻿namespace Battleship.Game
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using Battleship.Core.Components.Board;
+using Battleship.Core.Components.Ships;
+using Battleship.Core.Components.UserInterface;
+using Battleship.Core.Models;
+using Newtonsoft.Json;
+
+namespace Battleship.Game
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading;
-
-    using Battleship.Core.Components.Board;
-    using Battleship.Core.Components.Ships;
-    using Battleship.Core.Components.UserInterface;
-    using Battleship.Core.Models;
-
-    using Newtonsoft.Json;
-
     public class Program
     {
         private readonly IConsoleHelper consoleHelper;
@@ -26,7 +24,7 @@
         public Program()
         {
             // Game play objects
-            List<IShip> ships = new List<IShip> { new BattleShip(1), new Destroyer(2), new Destroyer(3) };
+            List<IShip> ships = new List<IShip> {new BattleShip(1), new Destroyer(2), new Destroyer(3)};
             playerStats = new PlayerStats();
 
             // Not using a IoC framework (manual singletons), so it will just get new up a instance here,
@@ -76,7 +74,7 @@
             {
                 if (!string.IsNullOrEmpty(input))
                 {
-                    var definition = new { SimulationTimer = 0, X = new List<char>(), Y = new List<int>() };
+                    var definition = new {SimulationTimer = 0, X = new List<char>(), Y = new List<int>()};
                     var json = JsonConvert.DeserializeAnonymousType(input, definition);
 
                     this.BuildUserInterface();
@@ -90,9 +88,16 @@
                             Thread.Sleep(TimeSpan.FromMilliseconds(json.SimulationTimer));
                             string automatedInput = $"{json.X[x]}{json.Y[y]}";
                             this.Execute(automatedInput);
-                            if (CheckShipHitCount()) break;
+                            if (this.CheckShipHitCount())
+                            {
+                                break;
+                            }
                         }
-                        if (CheckShipHitCount()) break;
+
+                        if (this.CheckShipHitCount())
+                        {
+                            break;
+                        }
                     }
 
                     this.Execute(); // execute again, to complete process
@@ -128,12 +133,13 @@
             {
                 int resetTop = Console.CursorTop;
 
-                if (CheckShipHitCount())
+                if (this.CheckShipHitCount())
                 {
                     message = consoleHelper.CompletedMessage;
                 }
 
-                consoleHelper.WriteLine($"[Hit: {playerStats.Hit}] [Miss: {playerStats.Miss}] [Ship(s) Sunk : {playerStats.Sunk}]");
+                consoleHelper.WriteLine(
+                    $"[Hit: {playerStats.Hit}] [Miss: {playerStats.Miss}] [Ship(s) Sunk : {playerStats.Sunk}]");
                 consoleHelper.ClearBufferToWriteLine($"Message : {message}");
 
                 inputLine = Console.CursorTop - 2;
@@ -178,7 +184,7 @@
 
         private bool CheckShipHitCount()
         {
-            if (this.shipCounter == playerStats.Sunk)
+            if (shipCounter == playerStats.Sunk)
             {
                 return true;
             }
