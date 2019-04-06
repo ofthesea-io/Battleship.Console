@@ -137,7 +137,7 @@
             this.NumberOfSegments = segmentation.GetSegments().Count();
 
             // update the board with randomly generated ship coordinates
-            this.UpdateSegmentationGridWithShips();
+            //this.UpdateSegmentationGridWithShips();
         }
 
         private void UpdateSegmentationGridWithShips()

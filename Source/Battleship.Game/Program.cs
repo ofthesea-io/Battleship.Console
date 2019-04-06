@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using Battleship.Core.Components.Board;
 using Battleship.Core.Components.Ships;
@@ -18,6 +19,8 @@ namespace Battleship.Game
         private readonly PlayerStats playerStats;
 
         private readonly int shipCounter;
+
+        private static readonly Stopwatch StopWatch = new Stopwatch();
 
         private string message;
 
@@ -42,9 +45,11 @@ namespace Battleship.Game
         private static void Main(string[] args)
         {
             Program p = new Program();
+            StopWatch.Start();
 
             if (args.Length == 0)
             {
+                //p.SimulateGamePlay("{'SimulationTimer': 0, 'X':['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'],'Y':[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]}");
                 p.Run();
             }
             else
@@ -101,6 +106,15 @@ namespace Battleship.Game
                     }
 
                     this.Execute(); // execute again, to complete process
+
+                    StopWatch.Stop();
+                    // Get the elapsed time as a TimeSpan value.
+                    TimeSpan ts = StopWatch.Elapsed;
+
+                    // Format and display the TimeSpan value.
+                    string elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds / 10:00}";
+                    Debug.WriteLine("RunTime " + elapsedTime);
+
                     while (true)
                     {
                         this.Exit(Console.ReadLine());

@@ -5,13 +5,13 @@
 
     using Battleship.Core.Models;
 
-    public static class BattleshipExtensions
+    public static class BattleshipExtensions 
     {
         private static readonly int Index = 1;
 
         private static readonly int XInitialPoint = 65;
 
-        private static readonly int GridDimension = 10;
+        private static readonly int GridDimension = 26;
 
         public static bool IsSegmentAvailable<TSource>(this IList<TSource> source, int x, int y)
         {
