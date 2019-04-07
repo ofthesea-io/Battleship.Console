@@ -105,8 +105,6 @@ namespace Battleship.Game
                         }
                     }
 
-                    this.Execute(); // execute again, to complete process
-
                     StopWatch.Stop();
                     // Get the elapsed time as a TimeSpan value.
                     TimeSpan ts = StopWatch.Elapsed;
@@ -114,6 +112,8 @@ namespace Battleship.Game
                     // Format and display the TimeSpan value.
                     string elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds / 10:00}";
                     Debug.WriteLine("RunTime " + elapsedTime);
+
+                    this.Execute(); // execute again, to complete process
 
                     while (true)
                     {
@@ -167,7 +167,7 @@ namespace Battleship.Game
 
                 message = consoleHelper.GetUserInput(input);
                 consoleHelper.ClearLine(inputLine);
-                gridGenerator.RedrawGrid();
+                //gridGenerator.RedrawGrid();
                 Console.SetCursorPosition(0, resetTop);
             }
             catch (ArgumentException)

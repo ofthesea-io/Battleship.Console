@@ -33,12 +33,13 @@
             // Arrange 
             int x = XInitialPoint;
             int y = GridDimension + Index;
-            Segment segment = new Segment(x, y, Water);
+            Coordinate coordinate = new Coordinate(x, y);
+            Segment segment = new Segment(Water);
 
             // Act and Assert
             try
             {
-                segmentation.AddSegment(segment);
+                segmentation.AddSegment(coordinate, segment);
                 Assert.Fail();
             }
             catch (IndexOutOfRangeException)
@@ -53,12 +54,13 @@
             // Arrange 
             int x = XInitialPoint;
             int y = GridDimension + Index;
+            Coordinate coordinate = new Coordinate(x, y);
+            var segment = new Segment(ShipDirection.Vertical, new Destroyer(1));
 
             // Act and Assert
             try
             {
-                var segment = new Segment(x, y, ShipDirection.Vertical, new Destroyer(1));
-                segmentation.UpdateSegment(segment);
+                segmentation.UpdateSegment(coordinate, segment);
                 Assert.Fail();
             }
             catch (IndexOutOfRangeException)
@@ -73,14 +75,15 @@
             // Arrange 
             int x = XInitialPoint;
             int y = GridDimension;
+            Coordinate coordinate = new Coordinate(x, y);
 
             // Act and Assert
             try
             {
-                segmentation.AddSegment(new Segment(x, y, Water));
-                IList<Segment> range = new List<Segment>()
+                segmentation.AddSegment(coordinate, new Segment(Water));
+                SortedList<Coordinate, Segment> range = new SortedList<Coordinate, Segment>(new CoordinateComparer())
                    {
-                       new Segment(x, y, Water)
+                       { coordinate, new Segment(Water) }
                    };
                 segmentation.UpdateSegmentRange(range);
                 Assert.Fail();
@@ -97,14 +100,14 @@
             // Arrange 
             int x = XInitialPoint;
             int y = GridDimension;
-
+            Coordinate coordinate = new Coordinate(x, y);
             // Act and Assert
             try
             {
-                segmentation.AddSegment(new Segment(x, y, ShipDirection.Horizontal, new BattleShip(1)));
-                IList<Segment> range = new List<Segment>()
+                segmentation.AddSegment(coordinate, new Segment(ShipDirection.Horizontal, new BattleShip(1)));
+                SortedList<Coordinate, Segment> range = new SortedList<Coordinate, Segment>()
                                        {
-                                           new Segment(x, y, Water)
+                                           { coordinate, new Segment(Water) }
                                        };
                 segmentation.UpdateSegmentRange(range);
                 Assert.Fail();
@@ -121,17 +124,18 @@
             // Arrange 
             int x = XInitialPoint;
             int y = GridDimension;
+            Coordinate coordinate = new Coordinate(x, y);
 
             // Act and Assert
             try
             {
-                segmentation.AddSegment(new Segment(x, y, Water));
-                IList<Segment> range = new List<Segment>()
-                                       {
-                                           new Segment(x, y, ShipDirection.Horizontal, new BattleShip(1))
-                                       };
+                segmentation.AddSegment(coordinate, new Segment(Water));
+                SortedList<Coordinate, Segment> range = new SortedList<Coordinate, Segment>(new CoordinateComparer())
+                   {
+                       { coordinate, new Segment(ShipDirection.Horizontal, new BattleShip(1)) }
+                   };
                 segmentation.UpdateSegmentRange(range);
-                Assert.Pass();
+                Assert.IsTrue(true);
             }
             catch (ArgumentException)
             {

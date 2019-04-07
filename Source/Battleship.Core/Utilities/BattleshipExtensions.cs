@@ -13,18 +13,39 @@
 
         private static readonly int GridDimension = 26;
 
-        public static bool IsSegmentAvailable<TSource>(this IList<TSource> source, int x, int y)
+        public static bool IsSegmentAvailable<TSource>(this IEnumerable<TSource> source, int x, int y)
         {
             bool result = true;
 
-            if (source.Count != 0)
+            if (source.Any())
             {
-                List<Segment> segments = (List<Segment>)source;
-                bool isTaken = segments.Any(q => q.PositionX == x && q.PositionY == y && !q.IsEmpty);
+                SortedList<Coordinate, Segment> segments = (SortedList<Coordinate, Segment>)source;
+                bool isTaken = segments.Any(q => q.Key.X == x && q.Key.Y == y && !q.Value.IsEmpty);
                 if (isTaken)
                 {
                     result = false;
                 }
+            }
+
+            return result;
+        }
+
+        public static bool AddRange<TSource>(this IEnumerable<TSource> source, SortedList<Coordinate, Segment> range)
+        {
+            bool result = true;
+
+            if (range.Any())
+            {
+                SortedList<Coordinate, Segment> segments = (SortedList<Coordinate, Segment>)source;
+
+                if (segments != null)
+                {
+                    foreach (KeyValuePair<Coordinate, Segment> pair in range)
+                    {
+                        segments.Add(pair.Key, pair.Value);
+                    }
+                }
+              
             }
 
             return result;

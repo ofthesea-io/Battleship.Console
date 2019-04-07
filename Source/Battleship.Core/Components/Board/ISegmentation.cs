@@ -12,26 +12,28 @@
         /// <summary>
         /// Add a segment to the segmentation grid
         /// </summary>
+        /// <param name="coordinate">Coordinate of the grid</param>
         /// <param name="segment">Segment of the grid</param>
-        void AddSegment(Segment segment);
+        void AddSegment(Coordinate coordinate, Segment segment);
 
         /// <summary>
         /// Update a segment in the segmentation grid
         /// </summary>
+        /// <param name="coordinate">Coordinate of the grid</param>
         /// <param name="segment">A segment within the grid</param>
-        void UpdateSegment(Segment segment);
+        void UpdateSegment(Coordinate coordinate, Segment segment);
 
         /// <summary>
         /// Update a range of segments in the segmentation grid
         /// </summary>
         /// <param name="segment">A list of segment within the grid</param>
-        void UpdateSegmentRange(IList<Segment> segment);
+        void UpdateSegmentRange(SortedList<Coordinate, Segment> segment);
 
         /// <summary>
         ///     Get the list of segments in the segmentation list
         /// </summary>
         /// <returns>A list of Segments</returns>
-        IList<Segment> GetSegments();
+        SortedList<Coordinate, Segment> GetSegments();
 
         /// <summary>
         ///     Gets a single segment

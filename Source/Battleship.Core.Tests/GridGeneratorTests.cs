@@ -35,7 +35,7 @@
         public void Board_WhenGridGenerated_ReturnOneHundredSegments()
         {
             // Arrange
-            int totalSegments = 100;
+            int totalSegments = base.GridDimension * base.GridDimension;
             int? result = 0;
 
             // Act

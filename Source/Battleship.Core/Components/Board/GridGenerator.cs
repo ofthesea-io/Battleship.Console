@@ -124,8 +124,9 @@
                 for (int xCounter = 0; xCounter <= GridDimension - Index; xCounter++)
                 {
                     consoleHelper.Write($" {Water} ");
-                    Segment segment = new Segment(XInitialPoint + xCounter, yCounter, Water);
-                    segmentation.AddSegment(segment);
+                    Segment segment = new Segment(Water);
+                    Coordinate coordinates = new Coordinate(XInitialPoint + xCounter, yCounter);
+                    segmentation.AddSegment(coordinates, segment);
                 }
 
                 boardTop++;
@@ -142,11 +143,11 @@
 
         private void UpdateSegmentationGridWithShips()
         {
-            List<Segment> segments = shipRandomiser.GetRandomisedShipCoordinates(ships);
+            SortedList<Coordinate, Segment> segments = shipRandomiser.GetRandomisedShipCoordinates(ships);
 
             segmentation.UpdateSegmentRange(segments);
 
-            this.NumberOfOccupiedSegments = segmentation.GetSegments().Count(q => !q.IsEmpty);
+            this.NumberOfOccupiedSegments = segmentation.GetSegments().Count(q => !q.Value.IsEmpty);
         }
 
         private IEnumerable<int> GetNumericRows()
