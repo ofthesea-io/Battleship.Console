@@ -19,7 +19,7 @@
 
             if (source.Any())
             {
-                SortedList<Coordinate, Segment> segments = (SortedList<Coordinate, Segment>)source;
+                SortedDictionary<Coordinate, Segment> segments = (SortedDictionary<Coordinate, Segment>)source;
                 bool isTaken = segments.Any(q => q.Key.X == x && q.Key.Y == y && !q.Value.IsEmpty);
                 if (isTaken)
                 {
@@ -30,13 +30,13 @@
             return result;
         }
 
-        public static bool AddRange<TSource>(this IEnumerable<TSource> source, SortedList<Coordinate, Segment> range)
+        public static bool AddRange<TSource>(this IEnumerable<TSource> source, SortedDictionary<Coordinate, Segment> range)
         {
             bool result = true;
 
             if (range.Any())
             {
-                SortedList<Coordinate, Segment> segments = (SortedList<Coordinate, Segment>)source;
+                SortedDictionary<Coordinate, Segment> segments = (SortedDictionary<Coordinate, Segment>)source;
 
                 if (segments != null)
                 {

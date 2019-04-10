@@ -11,11 +11,11 @@
     {
         private static volatile Segmentation instance;
 
-        private readonly SortedList<Coordinate, Segment> segmentations;
+        private readonly SortedDictionary<Coordinate, Segment> segmentations;
 
         protected Segmentation()
         {
-            segmentations = new SortedList<Coordinate, Segment>(new CoordinateComparer());
+            segmentations = new SortedDictionary<Coordinate, Segment>(new CoordinateComparer());
         }
 
         public static Segmentation Instance()
@@ -69,7 +69,7 @@
             }
         }
 
-        public void UpdateSegmentRange(SortedList<Coordinate, Segment> segments)
+        public void UpdateSegmentRange(SortedDictionary<Coordinate, Segment> segments)
         {
             foreach (var segment in segments)
             {
@@ -97,7 +97,7 @@
             }
         }
 
-        public SortedList<Coordinate, Segment> GetSegments()
+        public SortedDictionary<Coordinate, Segment> GetSegments()
         {
             return segmentations;
         }

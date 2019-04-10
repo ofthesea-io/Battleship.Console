@@ -18,7 +18,7 @@ namespace Battleship.Core.Tests
             IShip firstDestroyer = new Destroyer(1);
             IShip secondDestroyer = new Destroyer(2);
 
-            SortedList<Coordinate, Segment> segments = new SortedList<Coordinate, Segment>(new CoordinateComparer())
+            SortedDictionary<Coordinate, Segment> segments = new SortedDictionary<Coordinate, Segment>(new CoordinateComparer())
             {
                 {new Coordinate(69, 1), new Segment(ShipDirection.Horizontal, firstDestroyer)},
                 {new Coordinate(69, 2), new Segment(ShipDirection.Horizontal, firstDestroyer)},
@@ -43,7 +43,7 @@ namespace Battleship.Core.Tests
             IShip firstDestroyer = new Destroyer(1);
             IShip secondDestroyer = new Destroyer(2);
 
-            SortedList<Coordinate, Segment> segments = new SortedList<Coordinate, Segment>(new CoordinateComparer())
+            SortedDictionary<Coordinate, Segment> segments = new SortedDictionary<Coordinate, Segment>(new CoordinateComparer())
             {
                 {new Coordinate(68, 3), new Segment(ShipDirection.Horizontal, firstDestroyer)},
                 {new Coordinate(69, 3), new Segment(ShipDirection.Horizontal, firstDestroyer)},
@@ -68,7 +68,7 @@ namespace Battleship.Core.Tests
             IShip firstDestroyer = new Destroyer(1);
 
 
-            SortedList<Coordinate, Segment> segments = new SortedList<Coordinate, Segment>(new CoordinateComparer())
+            SortedDictionary<Coordinate, Segment> segments = new SortedDictionary<Coordinate, Segment>(new CoordinateComparer())
             {
                 {new Coordinate(69, 1), new Segment(ShipDirection.Horizontal, firstDestroyer)},
                 {new Coordinate(69, 2), new Segment(ShipDirection.Horizontal, firstDestroyer)},
@@ -93,7 +93,7 @@ namespace Battleship.Core.Tests
             IShip firstDestroyer = new Destroyer(1);
             IShip secondDestroyer = new Destroyer(2);
 
-            SortedList<Coordinate, Segment> segments = new SortedList<Coordinate, Segment>(new CoordinateComparer())
+            SortedDictionary<Coordinate, Segment> segments = new SortedDictionary<Coordinate, Segment>(new CoordinateComparer())
             {
                 {new Coordinate(69, 3), new Segment(ShipDirection.Horizontal, firstDestroyer)},
                 {new Coordinate(70, 3), new Segment(ShipDirection.Horizontal, firstDestroyer)},
@@ -117,7 +117,7 @@ namespace Battleship.Core.Tests
             IShip firstDestroyer = new Destroyer(1);
             IShip secondDestroyer = new Destroyer(2);
 
-            SortedList<Coordinate, Segment> segments = new SortedList<Coordinate, Segment>(new CoordinateComparer())
+            SortedDictionary<Coordinate, Segment> segments = new SortedDictionary<Coordinate, Segment>(new CoordinateComparer())
             {
                 {new Coordinate(68, 2), new Segment(ShipDirection.Horizontal, firstDestroyer)},
                 {new Coordinate(69, 2), new Segment(ShipDirection.Horizontal, firstDestroyer)},
@@ -142,7 +142,7 @@ namespace Battleship.Core.Tests
             IShip firstDestroyer = new Destroyer(1);
             IShip secondDestroyer = new Destroyer(2);
 
-            SortedList<Coordinate, Segment> segments = new SortedList<Coordinate, Segment>(new CoordinateComparer())
+            SortedDictionary<Coordinate, Segment> segments = new SortedDictionary<Coordinate, Segment>(new CoordinateComparer())
             {
                 {new Coordinate(68, 2), new Segment(ShipDirection.Horizontal, firstDestroyer)},
                 {new Coordinate(69, 2), new Segment(ShipDirection.Horizontal, firstDestroyer)},

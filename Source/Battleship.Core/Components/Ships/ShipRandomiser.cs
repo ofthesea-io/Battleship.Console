@@ -14,7 +14,7 @@
 
         private static volatile ShipRandomiser instance;
 
-        private readonly SortedList<Coordinate, Segment> segments;
+        private readonly SortedDictionary<Coordinate, Segment> segments;
 
         private readonly int xMidPoint;
 
@@ -24,7 +24,7 @@
 
         protected ShipRandomiser()
         {
-            segments = new SortedList<Coordinate, Segment>(new CoordinateComparer());
+            segments = new SortedDictionary<Coordinate, Segment>(new CoordinateComparer());
 
             yMidPoint = GridDimension / 2;
             xMidPoint = (XInitialPoint + GridDimension / 2) - Index;
@@ -48,7 +48,7 @@
 
         #region IShipRandomiser Members
 
-        public SortedList<Coordinate, Segment> GetRandomisedShipCoordinates(IList<IShip> ships)
+        public SortedDictionary<Coordinate, Segment> GetRandomisedShipCoordinates(IList<IShip> ships)
         {
             if (ships != null)
             {
@@ -56,7 +56,7 @@
 
                 // Create a temporary segment list and pass it along by reference
                 // Once done, we can clear it out and make sure the GC does its job
-                SortedList<Coordinate, Segment> temporarySegments = new SortedList<Coordinate, Segment>(new CoordinateComparer());
+                SortedDictionary<Coordinate, Segment> temporarySegments = new SortedDictionary<Coordinate, Segment>(new CoordinateComparer());
 
                 if (totalShipLength != segments.Count)
                 {
@@ -101,7 +101,7 @@
         #endregion
 
 
-        private void MapYAxis(IShip ship, ref SortedList<Coordinate, Segment> temporarySegments)
+        private void MapYAxis(IShip ship, ref SortedDictionary<Coordinate, Segment> temporarySegments)
         {
             coordinate = this.GenerateCoordinate();
 
@@ -131,7 +131,7 @@
             }
         }
 
-        private void MapXAxis(IShip ship, ref SortedList<Coordinate, Segment> temporarySegments)
+        private void MapXAxis(IShip ship, ref SortedDictionary<Coordinate, Segment> temporarySegments)
         {
             coordinate = this.GenerateCoordinate();
 
@@ -161,7 +161,7 @@
             }
         }
 
-        private bool AddToYAxis(int currentXPosition, int currentYPosition, IShip ship, ref SortedList<Coordinate, Segment> temporarySegments)
+        private bool AddToYAxis(int currentXPosition, int currentYPosition, IShip ship, ref SortedDictionary<Coordinate, Segment> temporarySegments)
         {
             bool result = false;
 
@@ -180,7 +180,7 @@
             return result;
         }
 
-        private bool AddToXAxis(int currentXPosition, int currentYPosition, IShip ship, ref SortedList<Coordinate, Segment> temporarySegments)
+        private bool AddToXAxis(int currentXPosition, int currentYPosition, IShip ship, ref SortedDictionary<Coordinate, Segment> temporarySegments)
         {
             bool result = false;
 
@@ -199,7 +199,7 @@
             return result;
         }
 
-        private void Clear(SortedList<Coordinate, Segment> temporarySegments)
+        private void Clear(SortedDictionary<Coordinate, Segment> temporarySegments)
         {
             temporarySegments.Clear();
         }

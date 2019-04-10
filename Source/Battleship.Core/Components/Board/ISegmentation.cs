@@ -27,13 +27,13 @@
         /// Update a range of segments in the segmentation grid
         /// </summary>
         /// <param name="segment">A list of segment within the grid</param>
-        void UpdateSegmentRange(SortedList<Coordinate, Segment> segment);
+        void UpdateSegmentRange(SortedDictionary<Coordinate, Segment> segment);
 
         /// <summary>
         ///     Get the list of segments in the segmentation list
         /// </summary>
         /// <returns>A list of Segments</returns>
-        SortedList<Coordinate, Segment> GetSegments();
+        SortedDictionary<Coordinate, Segment> GetSegments();
 
         /// <summary>
         ///     Gets a single segment

@@ -81,7 +81,7 @@
             try
             {
                 segmentation.AddSegment(coordinate, new Segment(Water));
-                SortedList<Coordinate, Segment> range = new SortedList<Coordinate, Segment>(new CoordinateComparer())
+                SortedDictionary<Coordinate, Segment> range = new SortedDictionary<Coordinate, Segment>(new CoordinateComparer())
                    {
                        { coordinate, new Segment(Water) }
                    };
@@ -105,7 +105,7 @@
             try
             {
                 segmentation.AddSegment(coordinate, new Segment(ShipDirection.Horizontal, new BattleShip(1)));
-                SortedList<Coordinate, Segment> range = new SortedList<Coordinate, Segment>()
+                SortedDictionary<Coordinate, Segment> range = new SortedDictionary<Coordinate, Segment>()
                                        {
                                            { coordinate, new Segment(Water) }
                                        };
@@ -130,7 +130,7 @@
             try
             {
                 segmentation.AddSegment(coordinate, new Segment(Water));
-                SortedList<Coordinate, Segment> range = new SortedList<Coordinate, Segment>(new CoordinateComparer())
+                SortedDictionary<Coordinate, Segment> range = new SortedDictionary<Coordinate, Segment>(new CoordinateComparer())
                    {
                        { coordinate, new Segment(ShipDirection.Horizontal, new BattleShip(1)) }
                    };

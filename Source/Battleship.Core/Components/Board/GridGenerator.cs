@@ -143,7 +143,7 @@
 
         private void UpdateSegmentationGridWithShips()
         {
-            SortedList<Coordinate, Segment> segments = shipRandomiser.GetRandomisedShipCoordinates(ships);
+            SortedDictionary<Coordinate, Segment> segments = shipRandomiser.GetRandomisedShipCoordinates(ships);
 
             segmentation.UpdateSegmentRange(segments);
 
