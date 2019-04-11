@@ -11,11 +11,11 @@
     {
         private static volatile Segmentation instance;
 
-        private readonly List<Segment> segmentations;
+        private readonly SortedDictionary<Coordinate, Segment> segmentations;
 
         protected Segmentation()
         {
-            segmentations = new List<Segment>();
+            segmentations = new SortedDictionary<Coordinate, Segment>(new CoordinateComparer());
         }
 
         public static Segmentation Instance()
@@ -36,24 +36,25 @@
 
         #region ISegmentation Members
 
-        public void AddSegment(Segment segment)
+        public void AddSegment(Coordinate coordinate, Segment segment)
         {
-            if (!BattleshipExtensions.IsSegmentWithInGridRange(segment.PositionX, segment.PositionY))
+            if (!BattleshipExtensions.IsSegmentWithInGridRange(coordinate.X, coordinate.Y))
             {
                 throw new IndexOutOfRangeException();
             }
 
-            segmentations.Add(new Segment(segment.PositionX, segment.PositionY, segment.Character));
+
+            segmentations.Add(coordinate, new Segment(segment.Character));
         }
 
-        public void UpdateSegment(Segment segment)
+        public void UpdateSegment(Coordinate coordinate, Segment segment)
         {
-            if (!BattleshipExtensions.IsSegmentWithInGridRange(segment.PositionX, segment.PositionY))
+            if (!BattleshipExtensions.IsSegmentWithInGridRange(coordinate.X, coordinate.Y))
             {
                 throw new IndexOutOfRangeException();
             }
          
-            Segment item = segmentations.FirstOrDefault(q => q.PositionX == segment.PositionX && q.PositionY == segment.PositionY);
+            Segment item = segmentations.FirstOrDefault(q => q.Key.X == coordinate.X && q.Key.Y == coordinate.Y).Value;
 
             if (item != null)
             {
@@ -68,42 +69,42 @@
             }
         }
 
-        public void UpdateSegmentRange(IList<Segment> segments)
+        public void UpdateSegmentRange(SortedDictionary<Coordinate, Segment> segments)
         {
-            foreach (Segment segment in segments)
+            foreach (var segment in segments)
             {
-                if (!BattleshipExtensions.IsSegmentWithInGridRange(segment.PositionX, segment.PositionY))
+                if (!BattleshipExtensions.IsSegmentWithInGridRange(segment.Key.X, segment.Key.Y))
                 {
                     throw new IndexOutOfRangeException();
                 }
 
-                Segment item = segmentations.FirstOrDefault(q => q.PositionX == segment.PositionX && q.PositionY == segment.PositionY);
+                Segment item = segmentations.FirstOrDefault(q => q.Key.X == segment.Key.X && q.Key.Y == segment.Key.Y).Value;
 
                 if (item != null)
                 {
-                    if (item.IsEmpty & segment.IsEmpty)
+                    if (item.IsEmpty & segment.Value.IsEmpty)
                     {
                         throw new ArgumentException();
                     }
 
                     item.IsEmpty = false;
-                    if (segment.Ship != null)
+                    if (segment.Value.Ship != null)
                     {
-                        item.Ship = segment.Ship;
-                        item.ShipDirection = segment.ShipDirection;
+                        item.Ship = segment.Value.Ship;
+                        item.ShipDirection = segment.Value.ShipDirection;
                     }
                 }
             }
         }
 
-        public IList<Segment> GetSegments()
+        public SortedDictionary<Coordinate, Segment> GetSegments()
         {
             return segmentations;
         }
 
         public Segment GetSegment(int x, int y)
         {
-            return segmentations.FirstOrDefault(q => q.PositionX == x && q.PositionY == y);
+            return segmentations.FirstOrDefault(q => q.Key.X == x && q.Key.Y == y).Value;
         }
 
         #endregion

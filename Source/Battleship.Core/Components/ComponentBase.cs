@@ -19,7 +19,7 @@
         // using the double-checked locking, but we are in a single thread
         protected static readonly object SyncObject = new object();
 
-        protected readonly int GridDimension = 10;
+        protected readonly int GridDimension = 26;
 
         protected readonly int Index = 1;
 

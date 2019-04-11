@@ -1,4 +1,6 @@
-﻿namespace Battleship.Core.Models
+﻿using System;
+
+namespace Battleship.Core.Models
 {
     using Battleship.Core.Components.Ships;
     using Battleship.Core.Enums;
@@ -6,28 +8,20 @@
     /// <summary>
     ///     Individual segment (cell) in the segmentation list on the grid
     /// </summary>
-    public class Segment
+    public class Segment 
     {
-        public Segment(int positionX, int positionY, char character)
+        public Segment(char character)
         {
-            this.PositionX = positionX;
-            this.PositionY = positionY;
             this.IsEmpty = true;
             this.Character = character;
         }
 
-        public Segment(int positionX, int positionY, ShipDirection shipDirection, IShip ship)
+        public Segment(ShipDirection shipDirection, IShip ship)
         {
-            this.PositionX = positionX;
-            this.PositionY = positionY;
             this.ShipDirection = shipDirection;
             this.Ship = ship;
             this.IsEmpty = false;
         }
-
-        public int PositionX { get; set; }
-
-        public int PositionY { get; set; }
 
         public bool IsEmpty { get; set; }
 

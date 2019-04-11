@@ -14,6 +14,6 @@
         /// </summary>
         /// <param name="ships">IEnumerable list of ships of be add</param>
         /// <returns>List of ship coordinates</returns>
-        List<Segment> GetRandomisedShipCoordinates(IList<IShip> ships);
+        SortedDictionary<Coordinate, Segment> GetRandomisedShipCoordinates(IList<IShip> ships);
     }
 }

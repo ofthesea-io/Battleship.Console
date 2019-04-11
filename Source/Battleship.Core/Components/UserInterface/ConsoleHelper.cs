@@ -143,11 +143,13 @@
                 return CoordinateTriedMessage;
             }
 
+            Coordinate coordinate = new Coordinate(x, y);
+
             if (segment.Ship == null)
             {
                 segment.IsEmpty = false;
                 segment.Character = Miss;
-                segmentation.UpdateSegment(segment);
+                segmentation.UpdateSegment(coordinate, segment);
                 message = MissMessage;
                 playerStats.Miss++;
             }
@@ -157,7 +159,7 @@
                 segment.IsEmpty = false;
                 segment.Character = Hit;
                 segment.Ship.ShipHit++;
-                segmentation.UpdateSegment(segment);
+                segmentation.UpdateSegment(coordinate, segment);
                 message = HitMessage;
                 playerStats.Hit++;
                 if (segment.Ship.IsShipSunk)

@@ -28,10 +28,10 @@
             List<IShip> ships = new List<IShip> { new BattleShip(1), new Destroyer(2), new Destroyer(3) };
 
             // Act
-            List<Segment> segments = shipRandomiser.GetRandomisedShipCoordinates(ships);
+            SortedDictionary<Coordinate, Segment> segments = shipRandomiser.GetRandomisedShipCoordinates(ships);
 
             // Make sure that the HashCodes are different
-            IEnumerable<IShip> battleship = segments.Where(s => s.Ship.ShipChar == BattleShipCode).Select(s => s.Ship);       
+            IEnumerable<IShip> battleship = segments.Where(s => s.Value.Ship.ShipChar == BattleShipCode).Select(s => s.Value.Ship);       
             int counter = battleship.GroupBy(q => q.GetHashCode()).Count();
 
             // Assert
@@ -48,8 +48,8 @@
             // Act
 
             // Make sure we only get one set of hash codes
-            List<Segment> segments = shipRandomiser.GetRandomisedShipCoordinates(ships);
-            IEnumerable<IShip> battleship = segments.Where(s => s.Ship.ShipChar == DestroyerCode).Select(s => s.Ship);
+            SortedDictionary<Coordinate, Segment> segments = shipRandomiser.GetRandomisedShipCoordinates(ships);
+            IEnumerable<IShip> battleship = segments.Where(s => s.Value.Ship.ShipChar == DestroyerCode).Select(s => s.Value.Ship);
 
             int counter = battleship.GroupBy(q => q.GetHashCode()).Count();
             // Assert
@@ -64,8 +64,8 @@
             List<IShip> ships = new List<IShip> { new BattleShip(1), new Destroyer(2), new Destroyer(3) };
 
             // Act
-            List<Segment> segments = shipRandomiser.GetRandomisedShipCoordinates(ships);
-            int counter = segments.Count(q => q.Ship.ShipChar == BattleShipCode);
+            SortedDictionary<Coordinate, Segment> segments = shipRandomiser.GetRandomisedShipCoordinates(ships);
+            int counter = segments.Count(q => q.Value.Ship.ShipChar == BattleShipCode);
 
             // Assert
             Assert.AreEqual(counter, numberOfSegments);
@@ -79,8 +79,8 @@
             List<IShip> ships = new List<IShip> { new BattleShip(1), new Destroyer(2), new Destroyer(3) };
 
             // Act
-            List<Segment> segments = shipRandomiser.GetRandomisedShipCoordinates(ships);
-            int counter = segments.Count(q => q.Ship.ShipChar == DestroyerCode);
+            SortedDictionary<Coordinate, Segment> segments = shipRandomiser.GetRandomisedShipCoordinates(ships);
+            int counter = segments.Count(q => q.Value.Ship.ShipChar == DestroyerCode);
 
             // Assert
             Assert.AreEqual(counter, numberOfSegments);
@@ -98,7 +98,7 @@
             List<IShip> ships = new List<IShip> { new BattleShip(1), new Destroyer(2), new Destroyer(3) };
 
             // Act
-            List<Segment> segments = shipRandomiser.GetRandomisedShipCoordinates(ships);
+            SortedDictionary<Coordinate, Segment> segments = shipRandomiser.GetRandomisedShipCoordinates(ships);
 
             // Assert
             Assert.AreEqual(segmentCounter, segments.Count);

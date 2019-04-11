@@ -14,7 +14,7 @@
 
         private static volatile ShipRandomiser instance;
 
-        private readonly List<Segment> segments;
+        private readonly SortedDictionary<Coordinate, Segment> segments;
 
         private readonly int xMidPoint;
 
@@ -24,7 +24,7 @@
 
         protected ShipRandomiser()
         {
-            segments = new List<Segment>();
+            segments = new SortedDictionary<Coordinate, Segment>(new CoordinateComparer());
 
             yMidPoint = GridDimension / 2;
             xMidPoint = (XInitialPoint + GridDimension / 2) - Index;
@@ -48,7 +48,7 @@
 
         #region IShipRandomiser Members
 
-        public List<Segment> GetRandomisedShipCoordinates(IList<IShip> ships)
+        public SortedDictionary<Coordinate, Segment> GetRandomisedShipCoordinates(IList<IShip> ships)
         {
             if (ships != null)
             {
@@ -56,7 +56,7 @@
 
                 // Create a temporary segment list and pass it along by reference
                 // Once done, we can clear it out and make sure the GC does its job
-                List<Segment> temporarySegments = new List<Segment>(totalShipLength);
+                SortedDictionary<Coordinate, Segment> temporarySegments = new SortedDictionary<Coordinate, Segment>(new CoordinateComparer());
 
                 if (totalShipLength != segments.Count)
                 {
@@ -100,7 +100,8 @@
 
         #endregion
 
-        private void MapYAxis(IShip ship, ref List<Segment> temporarySegments)
+
+        private void MapYAxis(IShip ship, ref SortedDictionary<Coordinate, Segment> temporarySegments)
         {
             coordinate = this.GenerateCoordinate();
 
@@ -130,7 +131,7 @@
             }
         }
 
-        private void MapXAxis(IShip ship, ref List<Segment> temporarySegments)
+        private void MapXAxis(IShip ship, ref SortedDictionary<Coordinate, Segment> temporarySegments)
         {
             coordinate = this.GenerateCoordinate();
 
@@ -160,7 +161,7 @@
             }
         }
 
-        private bool AddToYAxis(int currentXPosition, int currentYPosition, IShip ship, ref List<Segment> temporarySegments)
+        private bool AddToYAxis(int currentXPosition, int currentYPosition, IShip ship, ref SortedDictionary<Coordinate, Segment> temporarySegments)
         {
             bool result = false;
 
@@ -168,7 +169,7 @@
             if (segments.IsSegmentAvailable(currentXPosition, currentYPosition)
                 && BattleshipExtensions.IsSegmentWithInGridRange(currentXPosition, currentYPosition))
             {
-                temporarySegments.Add(new Segment(currentXPosition, currentYPosition, ShipDirection.Vertical, ship));
+                temporarySegments.Add(new Coordinate(currentXPosition, currentYPosition), new Segment(ShipDirection.Vertical, ship));
                 result = true;
             }
             else
@@ -179,7 +180,7 @@
             return result;
         }
 
-        private bool AddToXAxis(int currentXPosition, int currentYPosition, IShip ship, ref List<Segment> temporarySegments)
+        private bool AddToXAxis(int currentXPosition, int currentYPosition, IShip ship, ref SortedDictionary<Coordinate, Segment> temporarySegments)
         {
             bool result = false;
 
@@ -187,7 +188,7 @@
             if (segments.IsSegmentAvailable(currentXPosition, currentYPosition)
                 && BattleshipExtensions.IsSegmentWithInGridRange(currentXPosition, currentYPosition))
             {
-                temporarySegments.Add(new Segment(currentXPosition, currentYPosition, ShipDirection.Horizontal, ship));
+                temporarySegments.Add(new Coordinate(currentXPosition, currentYPosition), new Segment(ShipDirection.Horizontal, ship));
                 result = true;
             }
             else
@@ -198,9 +199,9 @@
             return result;
         }
 
-        private void Clear(List<Segment> shipCoordinates)
+        private void Clear(SortedDictionary<Coordinate, Segment> temporarySegments)
         {
-            shipCoordinates.Clear();
+            temporarySegments.Clear();
         }
 
         private Coordinate GenerateCoordinate()

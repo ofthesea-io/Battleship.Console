@@ -1,9 +1,11 @@
-﻿namespace Battleship.Core.Models
+﻿using System;
+
+namespace Battleship.Core.Models
 {
     /// <summary>
     ///     Coordinate on the graph. Decided against the Point2 struct.
     /// </summary>
-    public class Coordinate
+    public class Coordinate 
     {
         public Coordinate(int x, int y)
         {
@@ -16,3 +18,4 @@
         public int Y { get; }
     }
 }
+
