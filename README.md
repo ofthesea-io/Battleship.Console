@@ -1,4 +1,4 @@
-## Battleship Game (First Kata)
+## Battleship Game
 The following Battleship game uses the dimensions of a 10 X 10 grid.  The game is plotted on a X and Y axis. Instead of coding the X axis as chars, I decided to use the Ascii Table as it contains a numerical representation of characters, such as 'A' starting at point 65 and 'Z' ending in 90.  Both char and int consume one byte in memory (0 to 255) so the only overhead is the user input string manipulation. The reason for working in integers only, was to work in a geometrical graph quadrant manor. This would make working with Line equations, such as the linear Intersection equation easier:
 
 [https://en.wikipedia.org/wiki/Line-line_intersection](https://en.wikipedia.org/wiki/Line%E2%80%93line_intersection)
